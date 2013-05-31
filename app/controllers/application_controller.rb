@@ -35,9 +35,9 @@ class ApplicationController < ActionController::Base
     @resp.http_code = response.status
     return @resp
   end
-   def facebook_client
-    session[:access_token]
-  end
+   def current_user
+     puts session[:id]
+   end
   def check_user
     begin
       User.find(params[:user_id])
@@ -49,10 +49,10 @@ class ApplicationController < ActionController::Base
   end
   private
   
-  def current_user
-    puts "i am in current user with params#{session[:user_id]}"
-  
-  @current_user ||= User.find(session[:user_id]) if session[:user_id]
-end
+  # def current_user
+    # puts "i am in current user with params#{session[:user_id]}"
+#   
+  # @current_user ||= User.find(session[:user_id]) if session[:user_id]
+# end
 
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130523082840) do
+ActiveRecord::Schema.define(:version => 20130531063539) do
 
   create_table "event_properties", :force => true do |t|
     t.integer "event_id"
@@ -38,11 +38,16 @@ ActiveRecord::Schema.define(:version => 20130523082840) do
     t.string "reward"
   end
 
-  create_table "user_applications", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "application_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+  create_table "send_messages", :force => true do |t|
+    t.string   "sender_id"
+    t.string   "message"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "user_applications", :id => false, :force => true do |t|
+    t.string "user_id",        :null => false
+    t.string "application_id", :null => false
   end
 
   create_table "user_stocks", :force => true do |t|

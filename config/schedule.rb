@@ -1,8 +1,8 @@
 # wheneverize .
 #whenever --update-crontab store
-  # job_type :rake, "cd :path && PATH=/usr/local/bin:$PATH RAILS_ENV=:environment bundle exec rake :task :output"
+  job_type :rake, "cd :path && PATH=/usr/bin:$PATH RAILS_ENV=:environment bundle exec rake :task :output"
 set :environment, 'development'
-  set :output, "/var/log/missionfig/wheneve.log"
+  set :output, "/var/log/missionfig/whenever.log"
 #
 every 1.hours do
   rake "report:portfolio_hourly"

@@ -1,5 +1,7 @@
 MissionfigGame::Application.routes.draw do
 
+  resources :send_messages
+
   get "tip_user/send_notification"
 
   get "tip_user/send_message", :defaults => { :format => 'json'}
@@ -9,7 +11,7 @@ MissionfigGame::Application.routes.draw do
       get :callback_method,:custom_send_message
     end
   end
-
+  
   resources :user_applications do
     collection do
       get :application_status
@@ -49,6 +51,7 @@ MissionfigGame::Application.routes.draw do
 
   #fb_oauth Controller
   get "fb-oauth/show", :to => "fb-oauth#show"
+   get "fb-oauth/set_session", :to => "fb-oauth#set_session"
   post "fb-oauth", :to => 'fb_oauth#index'
   get "fb-oauth", :to => 'fb_oauth#index'
   get "fb-oauth/authorize", :to => "fb_oauth#authorize"

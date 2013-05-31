@@ -55,7 +55,14 @@ class FbOauthController < ApplicationController
         # format.html {render 'index'}
     # end
   end
-
+   def set_session
+     
+     session[:id]= params[:id]
+     respond_to do |format|
+     format.json {render :json => {:status => "success"}}
+  end
+     
+   end
 
    def session_counter(user_id)
     #validate if the user alrady has this the session counter record
@@ -84,9 +91,6 @@ class FbOauthController < ApplicationController
 
   def authorize
     @url = "http://www.facebook.com/dialog/oauth?client_id=#{$api_key}&redirect_uri=#{$fb_post_back}"
-    puts "facebook_client#{facebook_client}"
-    # content = open(URI.encode('https://graph.facebook.com/me?access_token=' + session[:access_token]))
-    # content = ActiveSupport::JSON.decode(content)
     respond_to do |format|
       format.html { render :template => "fb_oauth/authorize" }
     end
