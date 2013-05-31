@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Event:</b>
+  <%= @events_property.event_id %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @events_property.name %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @events_property.value %>
+</p>
+
+
+<%= link_to 'Edit', edit_events_property_path(@events_property) %> |
+<%= link_to 'Back', events_properties_path %>

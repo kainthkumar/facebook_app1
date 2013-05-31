@@ -1,0 +1,23 @@
+<h1>Listing user_states</h1>
+
+<table>
+  <tr>
+    <th>Model</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_states.each do |user_state| %>
+  <tr>
+    <td><%= user_state.model_id %></td>
+    <td><%= link_to 'Show', user_state %></td>
+    <td><%= link_to 'Edit', edit_user_state_path(user_state) %></td>
+    <td><%= link_to 'Destroy', user_state, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User state', new_user_state_path %>

@@ -1,0 +1,8 @@
+defaults: &defaults
+ fb_admin_ids: [100002274011963,100004123415872,100000467510415,675771396,674609466,570117772,650742200,1627665160,506200023]
+development:
+  <<: *defaults
+test:
+  <<: *defaults
+production:
+  <<: *defaults

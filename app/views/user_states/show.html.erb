@@ -1,0 +1,12 @@
+<p id="notice">
+	<%= notice %>
+</p>
+
+<p>
+	<b>Model:</b>
+	<%= @user_state.model_id %>
+	<%= @user_state.maps %>
+	<%= @user_state.stocks %>
+</p>
+<%= link_to 'Edit', edit_user_state_path(@user_state) %> |
+<%= link_to 'Back', user_states_path %>

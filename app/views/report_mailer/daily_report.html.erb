@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <style type="text/css">
+ table.collapse {border-collapse: collapse;}
+  td {text-align: right;}
+  th {text-align: center;}
+  td.left{text-align: left;}
+  table.portfolio-header {border: 1px solid #CCC;
+border-radius: 5px;
+padding: 5px;
+width: 420px;}
+body {width: 600px}
+tr.title th {border-bottom: 1px solid #CCC}
+table.portfolio-header th {cellspacing :0; text-align: left;}
+table.portfolio-header td {text-align: left;}
+table.stocks {width: 490px;}
+h1,h2,h3,h4 {margin: 3px;text-align: left}
+body {padding-left: 20px}
+  /*.red {color: red;}*/
+  /*.green {color: green;}*/
+</style>
+<style type="text/css" media="screen"> 
+        html, body  { height:100%; }
+        body { margin:0; padding:0; overflow:auto; text-align:none !important; 
+               background-color: white; }   
+        object:focus { outline:none; }
+        #flashContent { display:none; }
+</style>
+  <h1>Performance Report</h1>
+  <div class="portfolio-header">
+    <table class="portfolio-header">
+      <tr >
+        <th>Total</th>
+        <th>Bank Balance</th>
+      </tr>
+      <tr>
+        <td>$<%= @report_d.portfolio_price.round(2)%></td>
+        <td>$<%= @user.model_doc.cash %></td>
+      </tr>
+    </table>
+  </div>
+  
+  <% if File.exists?("#{Rails.root}/app/assets/images/#{@user.id}_report.jpg") %>
+    <h3>Daily Performance</h3>
+    <img src="<%= @host_url %><%= asset_path "#{@user.id}_report.jpg" %>">
+  <%end%>
+  <% if !@report_d.stocks_balance.nil? %>
+  <h3>My Stockyard Portfolio</h3>
+  <table class="stocks collapse">
+    <tr class="title">
+      <th>Symbol</th>
+      <th>Daily Gain</th>
+      <th>Latest Price</th>
+      <th>Shares</th>
+      <th>Value Gain</th>
+    </tr>
+    <% @report_d.stocks_balance.each do |symbol, vale|%>
+    <tr>
+      <td class="left">
+        <span><%=symbol%></span>
+      </td>
+      <td>
+        <span><%= vale["daily_gain_amount"].round(2)%>  <%= "+" if vale["daily_gain_porcent"] > 0 %>
+          <%= "#{vale["daily_gain_porcent"].round(2)}%"%></span>
+      </td>
+      <td>
+        <span><%= vale["latest_price"] %></span>
+      </td>
+      <td>
+        <span>
+          <%= vale["shares"] %>
+        </span>
+      </td>
+      <td >
+        <span>
+        <%= vale["value_gain_amount"].round(2)%>  <%= "+" if vale["value_gain_porcent"] > 0 %>
+          <%= "#{vale["value_gain_porcent"].round(2)}%"%></span>
+        </span>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  <%end%>
+  <% if !@report_d.watch_list_scores.nil? && !@report_d.watch_list_scores.empty?%>
+  <h3>My Watch List</h3>
+  <table class="collapse">
+    <tr class="title">
+      <th>Symbol</th>
+      <th>Daily Gain</th>
+      <th>Latest Price</th>
+    </tr>
+    <% @report_d.watch_list_scores.each do |symbol, vale|%>
+    <tr>
+      <td class="left">
+        <span><%=symbol%></span>
+      </td>
+      <td>
+        <span><%= vale["daily_gain_amount"].round(2)%>  <%= "+" if vale["daily_gain_porcent"] > 0 %>
+          <%= "#{vale["daily_gain_porcent"].round(2)}%"%></span>
+      </td>
+      <td>
+        <span><%= vale["latest_price"].round(2)%></span>
+      </td>
+    </tr>
+    <%end%>
+  </table>
+  <%end%>
+</body>
+</html>

@@ -1,0 +1,83 @@
+defaults: &defaults
+  start_cash: 25000
+  start_exp: 0 
+  start_map: {}
+  start_stocks: {}
+  start_quest: 1
+  stock_server_url: http://missionfigstock2.lognllc.com
+  stock_history_controller: stock-history
+  stock_history_controller_report: stock-history/report
+  stock_realtime_controller: stock-realtime
+  tip_user_controller: tip_user/send_message
+  stock_search_controller: stock-search
+  stock_index_controller: stock-index
+  api_key: 260194584080622
+  secret_key: af32307373d44db2b0bad6dc6cc573bf
+  start_game_url: http://missionfigstock2.lognllc.com/flash/FIG.html
+  open_graph_url: https://graph.facebook.com/ 
+  host_app: http://missionfig2.lognllc.com
+  top_messages: 100
+  mixpanel_token: 2c41393632ab0be2926209eaf5adfe8e
+
+development:
+  start_cash: 25000
+  start_exp: 0
+  start_map: {}
+  start_stocks: {}
+  start_quest: 1
+  stock_server_url: http://missionfigstock2.lognllc.com
+  stock_history_controller: stock-history
+  stock_history_controller_report: stock-history/report
+  stock_realtime_controller: stock-realtime
+  tip_user_controller: tip_user/send_message
+  stock_search_controller: stock-search
+  stock_index_controller: stock-index
+  api_key: 280423615391028
+  secret_key: 141dbf31db998c344dddd74a9e962b72
+  start_game_url: http://missionfigstock2.lognllc.com/flash/FIG.html
+  open_graph_url: https://graph.facebook.com/ 
+  host_app: http://missionfig2.lognllc.com
+  top_messages: 300
+  mixpanel_token: 2c41393632ab0be2926209eaf5adfe8e
+
+test:
+  start_cash: 25000
+  start_exp: 0
+  start_map: {}
+  start_stocks: {}
+  start_quest: 1
+  stock_server_url: http://stockstaging.projectmfig.com
+  stock_history_controller: stock-history
+  stock_history_controller_report: stock-history/report
+  stock_realtime_controller: stock-realtime
+  tip_user_controller: tip_user/send_message
+  stock_search_controller: stock-search
+  stock_index_controller: stock-index
+  api_key: 262571243845732
+  secret_key: 6150ae5a21882e9b3b650798f02292a3
+  start_game_url: http://gamestaging.projectmfig.com/flash/FIG.html
+  open_graph_url: https://graph.facebook.com/
+  host_app: http://gamestaging.projectmfig.com
+  top_messages: 300
+  mixpanel_token: 2c41393632ab0be2926209eaf5adfe8e
+
+production:
+  start_cash: 25000
+  start_exp: 0
+  start_map: {}
+  start_stocks: {}
+  start_quest: 1
+  stock_server_url: http://stock.projectmfig.com
+  stock_history_controller: stock-history
+  stock_history_controller_report: stock-history/report
+  stock_realtime_controller: stock-realtime
+  tip_user_controller: tip_user/send_message
+  stock_search_controller: stock-search
+  stock_index_controller: stock-index
+  api_key: 260194584080622
+  secret_key: af32307373d44db2b0bad6dc6cc573bf
+  start_game_url: http://wwww.projectmfig.com/flash/FIG.html
+  open_graph_url: https://graph.facebook.com/ 
+  host_app: http://www.projectmfig.com
+  top_messages: 300
+  mixpanel_token: 2c41393632ab0be2926209eaf5adfe8e

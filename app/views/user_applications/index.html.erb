@@ -1,0 +1,21 @@
+<h1>Listing user_applications</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_applications.each do |user_application| %>
+  <tr>
+    <td><%= link_to 'Show', user_application %></td>
+    <td><%= link_to 'Edit', edit_user_application_path(user_application) %></td>
+    <td><%= link_to 'Destroy', user_application, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User application', new_user_application_path %>

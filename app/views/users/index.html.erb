@@ -1,0 +1,31 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Facebook token</th>
+    <th>Date created</th>
+    <th>Current quest</th>
+    <th>Experience points</th>
+    <th>Stockyard name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.facebook_token %></td>
+    <td><%= user.date_created %></td>
+    <td><%= user.current_quest %></td>
+    <td><%= user.experience_points %></td>
+    <td><%= user.stockyard_name %></td>
+    <td><%= link_to 'Show', user %></td>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_user_path %>

@@ -1,0 +1,293 @@
+
+<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<%= javascript_include_tag "kendo/kendo.core.js" %>
+<%= javascript_include_tag "kendo/kendo.data.js" %>
+<%= javascript_include_tag "kendo/kendo.pager.js" %>
+<%= javascript_include_tag "kendo/kendo.groupable.js" %>
+<%= javascript_include_tag "kendo/kendo.data.odata.js" %>
+<%= javascript_include_tag "kendo/kendo.list.js" %>
+<%= javascript_include_tag "kendo/kendo.reorderable.js" %>
+<%= javascript_include_tag "kendo/kendo.sortable.js" %>
+<%= javascript_include_tag "kendo/kendo.filtermenu.js" %>
+<%= javascript_include_tag "kendo/kendo.popup.js" %>
+<%= javascript_include_tag "kendo/kendo.numerictextbox.js" %>
+
+<%= javascript_include_tag "kendo/kendo.draganddrop.js" %>
+<%= javascript_include_tag "kendo/kendo.grid.js" %>
+
+<%= javascript_include_tag "kendo/kendo.menu.js" %>
+
+<%= stylesheet_link_tag "kendo.common.min.css" %>
+<%= stylesheet_link_tag "kendo.blueopal.min.css" %>
+
+<script type="text/javascript" src="http://www.kunalbabre.com/projects/table2CSV.js">
+</script>
+
+<style>
+    #clientsDb {
+        float: left;
+        width: 1005px;
+        height: 556px;
+        padding: 11px 4px 0 4px;
+        background-color: #5290ab;
+        border-radius: 10px;
+        border: #5C7A99 1px solid;
+    }
+</style>
+ <style scoped>
+      .k-item {
+        border-top: white 1px solid;
+        border-bottom: white 1px solid;
+      }
+
+      #content-div {
+        width: 1200px;
+        margin: auto;
+      }
+      #megaStore {
+          width: 120px;
+          margin: 30px auto;
+          padding-top: 120px;
+      }
+      #menu {
+        float: left;
+        width: 157px;
+        margin-right: 20px;
+        border: #5C7A99 4px solid;
+        border-radius: 4px;
+      }
+      #menu h2 {
+          font-size: 1em;
+          text-transform: uppercase;
+          padding: 5px 10px;
+      }
+      #template img {
+          margin: 5px 20px 0 0;
+          float: left;
+      }
+      #template {
+          width: 380px;
+      }
+      #template ol {
+          float: left;
+          margin: 0;
+          padding: 10px 10px 0 10px;
+      }
+      #template:after {
+          content: ".";
+          display: block;
+          height: 0;
+          clear: both;
+          visibility: hidden;
+      }
+      #template .k-button {
+          float: left;
+          clear: left;
+          margin: 5px 0 5px 12px;
+      }
+      h1#event-title {
+        color: #5290AB;
+        font-weight: bold;
+        margin: 2px 0;
+        font-size: 49px;
+      }
+      a#csv-link {
+        display: inline;
+        color: white;
+        font-weight: bold;
+        text-decoration: none;
+        float: right;
+      }
+      #grid {
+        clear: both;
+      }
+  </style>
+  <script>
+ 
+
+
+    $(document).ready(function() {
+      $("#menu").kendoMenu({orientation: "vertical"});
+
+      $('ul#menu li').click(function(){
+          fill_grid($(this).attr("scope"));
+      });
+
+
+      $("#tocsv").click(function(){
+        $($("#grid").data("kendoGrid").columns).each(function() { console.log(jQuery(this).attr("field")) });
+      });
+    });
+  </script>
+
+<script>
+
+      object = {"sign_up_date":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"event","width":90,"title":"Event"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"field":"Date"}],"user_level":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"level","width":90,"title":"Level"},{"field":"xp","width":30,"title":"Experience"}],"quest":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"quest_name","width":90,"title":"Quest"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"quiz":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"quiz_name","width":90,"title":"Quiz Name"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"visit_market":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"visits_number","width":90,"title":"Visits Number"}],"visit_friend":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"friends_visits_number","width":90,"title":"Visits Number"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"daily_report":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"tip":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"type","width":50,"title":"Type"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"wall_post":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"type","width":50,"title":"Type"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"visit_dummy":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"}],"session_start":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"},{"field":"session_counter","width":50,"title":"counter"}],"portolio_invested":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"total_assets","width":50,"title":"Total Assets"},{"field":"cash","width":50,"title":"Cash"},{"field":"invested","width":50,"title":"% Invested"}],"friends_joined":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"friends_number","width":50,"title":"Friends Number"}],"invite_friend":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"friend_number","width":50,"title":"Friends Number"}],"stock":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"},{"field":"stock","width":50,"title":"Stock"},{"field":"type","width":50,"title":"Transaction Type"},{"field":"shares","width":50,"title":"Transaction Shares"}],"stock_report":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"symbol","width":50,"title":"Stock"},{"field":"shares","width":50,"title":"Shares"},{"field":"purchase_price","width":50,"title":"Purchased Price"},{"field":"total_invested","width":50,"title":"Total Invested"}],"historical_performance":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"date","width":30,"template":'#= kendo.toString(date,"yyyy MM dd") #',"title":"Date"},{"field":"bank_amount","width":50,"title":"Bank"},{"field":"portfolio_price","width":50,"title":"Stockyard Price"},{"field":"portfolio_gain","width":50,"title":"Porfolio Gain"},{"field":"portfolio_change","width":50,"title":"Porfolio Gain Percent"}],"playtime":[{"field":"user_id","width":10,"title":"ID"},{"field":"stockyard_name","width":50,"title":"Username"},{"field":"minutes","width":50,"title":"Minutes"}]}
+
+
+
+    function ConvertToCSV(objArray) {
+            var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
+            var str = '';
+
+            for (var i = 0; i < array.length; i++) {
+                var line = '';
+                for (var index in array[i]) {
+                    if (line != '') line += ','
+
+                    line += array[i][index];
+                }
+
+                str += line + '\r\n';
+            }
+            var generator = window.open('', 'csv', 'height=400,width=600');
+            generator.document.write('<html><head><title>CSV</title>');
+            generator.document.write('</head><body >');
+            generator.document.write('<textArea cols=70 rows=15 wrap="off" >');
+            generator.document.write(str);
+            generator.document.write('</textArea>');
+            generator.document.write('</body></html>');
+            generator.document.close();
+            return str;
+        }
+
+     function get_data(type){
+        response = null;
+        
+        jQuery.ajax({
+          url: '/events/'+ type,
+          data: {user_id: 28, date: "2012-09-06"},
+          dataType: 'json',
+          async: false,
+          success: function(data) {
+            response = data;
+            
+          }, 
+        });
+        //tocsvfile(response,'test',true);
+        //console.log(ConvertToCSV(response));
+        return response;
+      }
+
+     function fill_grid(type) { 
+      $("a#csv-link").hide();
+         $("#grid").html('');
+         $("img#ajaxSpinnerImage").show();
+        $("#grid").kendoGrid({
+            dataSource: {
+                data: get_data(type),
+                pageSize: 20
+            },
+            groupable: true,
+            sortable: true,
+            pageable: {
+                pageSizes: true
+            },
+            height: 526,
+            columns: object[type]
+        });
+        $("img#ajaxSpinnerImage").hide();
+        $("a#csv-link").attr("href", "/events/" + type + ".csv");
+        $("a#csv-link").show();
+      }
+
+
+</script>
+
+<style>
+img#ajaxSpinnerContainer {height:11px;}
+img#ajaxSpinnerImage {display:none;}
+div#ajaxSpinnerContainer {
+  position: absolute;
+  top: 30%;
+  right: 43%;
+  margin: auto;
+  z-index: 23;
+}
+.k-menu .k-item > .k-link {
+padding: 5px 2px;
+}
+</style>
+<h1 id="event-title">Listing Events</h1>
+<div id="ajaxSpinnerContainer">
+<img src="/assets/ajax-loader.gif" id="ajaxSpinnerImage" title="working...">
+</div>
+<div id="content-div">
+  <ul id="menu">
+    <li scope="sign_up_date" >
+        Sign Up Date
+    </li>
+    <li scope="visit_market" >
+        Market Visits
+    </li >
+    <li scope="quest" >
+        Quest Tracker
+    </li >
+    <li scope="playtime" >
+        User PlayTime
+    </li>
+     <li scope="visit_friend" >
+        Friends Visited
+    </li >
+     <li scope="invite_friend">
+        Friends Invited
+    </li>
+    <li scope="friends_joined" >
+        Friends Joined
+    </li>
+    <li scope="visit_dummy">
+        Dummy Friend Visit
+    </li >
+     <li scope="session_start">
+        Session Counter
+    </li >
+    <li scope="stock" >
+        Investement Purchase
+    </li>
+
+    <li scope="user_level" >
+        Level
+    </li>
+    <li scope="tip">
+        Tip Date
+    </li>
+    <li scope="historical_performance">
+        Historical Performance
+    </li>
+    <li scope="wall_post" >
+        Wall Post
+    </li>
+    <li scope="quiz">
+        Quiz Tracker
+    </li>
+    <!--
+    <li scope="investement_exportation" >
+        Investement Exportation
+    </li>
+    -->
+    <li scope="visit_market" disabled="disabled">
+        Stock Ratings
+    </li>
+    <li scope="stock_report" >
+       Investments weekly report
+    </li>
+    <li scope="portolio_invested" >
+      % Invested
+    </li>
+    <li scope="daily_report">
+        Daily Performance Report
+    </li>
+    <li scope="visit_market" disabled="disabled">
+        Email Open Rate
+    </li>
+</ul>
+<div id="clientsDb">
+  <a href="" target="bank" id="csv-link" style="display:none;">download csv</a>
+  <div id="grid">
+    <span>Click Left Categories</span>
+  </div>
+
+</div>
+
+<br style="clear:both;">
+</div>

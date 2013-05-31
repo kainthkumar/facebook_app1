@@ -1,0 +1,342 @@
+<html>
+	<head>
+		<title>Game Server</title>
+		<style>
+			div.header {
+				padding: 30px;
+				margin: 10px;
+				border-radius: 3px;
+			}
+			b {
+				color: green;
+			}
+			h1 {
+				margin: 3px 0px;
+				color: green;
+			}
+			textarea {
+				margin: 2px;
+				height: 110px;
+				width: 100%;
+			}
+		</style>
+		<style type="text/css">
+
+			.basic, #list2, #list3, #navigation { width:20em; }
+
+			#log { position:fixed; bottom: 0; right:1em; text-align:right; }
+			#switch { position: fixed; bottom: 0; right: 15em; }
+
+			.basic  {
+				width: 365px;
+				font-family: verdana;
+				border: 1px solid black;
+			}
+			.basic div {
+				background-color: #eee;
+			}
+
+			.basic p {
+				margin-bottom : 10px;
+				border: none;
+				text-decoration: none;
+				font-size: 12px;
+				margin: 0px;
+				padding: 10px;
+			}
+			.basic a {
+				cursor:pointer;
+				display:block;
+				padding:5px;
+				margin-top: 0;
+				text-decoration: none;
+				font-weight: bold;
+				font-size: 12px;
+				color: white;
+				background-color: #198D19;
+				border-top: 1px solid #FFFFFF;
+				border-bottom: 1px solid #999;
+			}
+			.basic a:hover {
+				background-color: white;
+			}
+			.basic a.selected {
+				color: black;
+				background-color: #00FF00;
+			}
+
+			input#aditional-url{
+				width: 400px;
+			}
+			.left {
+				float: left;
+			}
+			.clean {
+				clear: both;
+			}
+		</style>
+		<script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="jquery.accordion.min.js"></script>
+		<script>
+			jQuery(document).ready(function() {
+				jQuery('div#list1a').accordion({
+					autoheight: false
+				});
+				jQuery(document).ready(function() {
+				jQuery('div#list1b').accordion({
+					autoheight: false
+				});
+				jQuery('select#method').change(function(){
+					if (jQuery(this).val() == "post")
+						jQuery("div.parameters").show();
+					else
+						jQuery("div.parameters").hide();
+				});
+
+
+				function recurse(data) {
+					var htmlRetStr = "<ul class='recurseObj' >";
+					for (var key in data) {
+						if ( typeof (data[key]) == 'object' && data[key] != null) {
+							htmlRetStr += "<li class='keyObj' >" + key + ":<ul class='recurseSubObj' >";
+							htmlRetStr += recurse(data[key]);
+							htmlRetStr += '</ul  ></li   >';
+						} else {
+							htmlRetStr += ("<li class='keyStr' >" + key + ': &quot;' + data[key] + '&quot;</li  >' );
+						}
+					};
+					htmlRetStr += '</ul >';
+					return (htmlRetStr );
+				}
+				jQuery('input.submit').click(function() {
+					var _url = jQuery('select#controller').val()
+					if (jQuery('input#aditional-url').val() != "") {
+						_url += "/" + jQuery('input#aditional-url').val();
+					}
+					_type = jQuery('select#method').val(); 
+					_data = '';
+					if (_type == "post"){
+						_data = jQuery('textarea.parameters').val()
+					}
+					jQuery.ajax({
+						url : _url,
+						type: _type,
+						data: _data,
+						dataType : 'json',
+						beforeSend: setHeader,
+						success : function(data) {
+							var datat =recurse(data);
+							jQuery("div#restults").html(datat);
+							console.log(data);
+						}
+					})
+				});
+				function setHeader(xhr) {
+            xhr.setRequestHeader('Accept', 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+        }
+			});
+	});
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<h1>Game Server Testing</h1>
+			<label for="controlelr"> <b>Controller</b>
+				<br>
+				<select id="method">
+					<option id="get" value="get">GET</option>
+					<option id="post" value="post">POST</option>
+				</select>
+				<select id="controller">
+					<option id="query" value="users">users</option>
+					<option id="historical" value="stock-history">stock-history</option>
+					<option id="historical" value="stock-realtime">stock-realtime</option>
+					<option id="historical" value="inbox">inbox</option>
+				</select>
+				<input type="text" name="aditinal-url" id="aditional-url">Aditional url
+				<input type="submit" value="Request" class="submit" />
+			</label>
+			<br>
+				<div style="display:none" class="parameters">
+					  <label for="parameters"> <b>Parameters:</b>
+						<br>
+						<textarea class="parameters" ></textarea>
+					</label>
+				</div>
+				<ul class="left">
+						<li>
+							<b>User</b>
+			<div class="basic" id="list1a">
+			<a>Get user information:</a>
+			<div>
+				<p>
+					<b>Method</b>: GET<br>
+					<b>Controller</b>: Users<br>
+					<b>Aditional url</b>: userid<br/>
+					<b>Example</b>:<br> 1<br/>
+				</p>
+			</div>
+			<a>Reset User Action</a>
+			<div>
+				<p>
+					<b>Method</b>: GET<br>
+					<b>Controller</b>: Users<br>
+					<b>Aditional url</b>: userid:/reset<br/>
+					<b>Example</b>:<br> 2/reset<br/>
+				</p>
+			</div>
+			<a>Friends User Action</a>
+			<div>
+				<p>
+					<b>Method</b>: GET<br>
+					<b>Controller</b>: Users<br>
+					<b>Aditional url</b>: userid:/friends<br/>
+					<b>Example</b>:<br> 9/friends<br/>
+				</p>
+			</div>
+			<a>User Document manupulation</a>
+			<div>
+				<p>
+					<b>Method</b>: POST<br>
+					<b>Controller</b>: Users<br>
+					<b>Aditional url</b>: userid:/doc<br/>
+					<b>Parameters</b>: json request object<br>
+					<b>Example</b>:<br> 
+					9/doc<br/>
+				  parameters:<b>
+				  <pre>
+{
+ "$set": {
+      "map.720": {
+                    "z": 0,
+                    "stock_id": "720",
+                    "shares": 14,
+                    "y": 2,
+                    "stock_symbol": "Y",
+                    "x": 0,
+                    "stock_symbol_id": "20",
+                    "color_filter": 1
+                }
+  }
+}
+				 </pre></b>
+				</p>
+			</div>
+		</div>
+						</li>
+				</ul>
+				<ul class="left">
+					<li>
+							<b>Stocks</b>
+							<div class="basic" id="list1b">
+								<a>Stock realtime:</a>
+								<div>
+									<p>
+										<b>Method</b>: GET<br>
+										<b>Controller</b>: stock-realtime<br>
+										<b>Aditional url</b>: ?query[]=symbol<br/>
+										<b>Example</b>:<br> 
+										?query=GOOG
+										<br>
+										or
+										<br>
+										?query[]=GOOG&query[]=FB
+									</p>
+								</div>
+								<a>Realtime by category:</a>
+								<div>
+									<p>
+										<b>Method</b>: GET<br>
+										<b>Controller</b>: stock-realtime<br>
+										<b>Aditional url</b>: category?categories[]=technology<br/>
+										<b>Example</b>:<br> 
+										category?categories[]=technology
+										<br>
+									</p>
+								</div>
+								<a>Stock history:</a>
+								<div>
+									<p>
+										<b>Method</b>: GET<br>
+										<b>Controller</b>: stock-history<br>
+										<b>Aditional url</b>: ?query[]=FB&query[]=GOOG&start_date=2012-06-10&end_date=2010-07-10<br/>
+										<b>Example</b>:<br> 
+										?query[]=FB&query[]=GOOG&start_date=2012-06-10&end_date=2012-07-10
+										<br>
+									</p>
+								</div>
+								<a>Stock history by default 20 scores:</a>
+								<div>
+									<p>
+										<b>Method</b>: GET<br>
+										<b>Controller</b>: stock-history<br>
+										<b>Aditional url</b>: ?query[]=FB&query[]=GOOG  // if the date range is not specified, so 20 last days scores<br/>
+										<b>Example</b>:<br> 
+										?query[]=FB&query[]=GOOG
+										<br>
+									</p>
+								</div>
+								<a>Stock history by Time elapse:</a>
+								<div>
+									<p>
+										<b>Method</b>: GET<br>
+										<b>Controller</b>: stock-history<br>
+										<b>Aditional url</b>: ?query[]=GOOG&time_elapse=3  // elapse = 3, 4, 6, 12 (it means months)<br/>
+										<b>Example</b>:<br> 
+										?query[]=GOOG&time_elapse=3
+										<br>
+									</p>
+								</div>
+							</div>
+						</li>
+				</ul>
+				<ul class="left">
+						<li>
+							<b>Inbox</b>
+							<div class="basic" id="list1b">
+								<a>Send:</a>
+								<div>
+									<p>
+										<b>Method</b>: POST<br>
+										<b>Controller</b>: inbox<br>
+										<b>Aditional url</b>: :userid:/send<br/>
+										<b>Example</b>:<br> 
+										aditional uri: 1/send <br>
+										parameters: 
+										<b><pre>
+{
+    "receiver_ids": [2, 3],
+    "message": "What do you think about FB?",
+    "stock_symbol": "FB"
+}
+										</pre></b>
+									</p>
+								</div>
+								<a>Reply:</a>
+								<div>
+									<p>
+										<b>Method</b>: POST<br>
+										<b>Controller</b>: inbox<br>
+										<b>Aditional url</b>: :userid/reply<br/>
+										<b>Example</b>:<br> 
+										aditional uri: 1/reply <br>
+										parameters: 
+										<b><pre>
+{
+   "message_id": "put the id here",
+   "reply": "Oh totally, buy it!!"
+}
+										</pre></b>
+										<br>
+									</p>
+								</div>
+							</div>
+						</li>
+				</ul>
+			<br class="clean">
+			</div>
+		<br class="clean">
+		<div id="restults"></div>
+	</body>
+</html>

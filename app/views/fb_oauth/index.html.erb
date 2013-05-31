@@ -1,0 +1,89 @@
+
+        <div id="fb-root"></div>
+        <script src="http://connect.facebook.net/en_US/all.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script>
+        function verify(){
+        	//var app_array = Arra
+        	var myAppId='641206265895621'
+   FB.init({
+    appId  : "641206265895621",
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+  
+  FB.login(function(response) {
+  	
+   if (response.authResponse) {
+   	var access_token =   '641206265895621|9250pmdIBdwJnsUykTUnoL5Xm9E'
+   	var notificationData={
+   	'href' : 'http://google.com',
+   	'access_token': access_token,
+   	'template': 'Welcome to mission fig, a fun and a safe way for investing and building mock portfolio.'
+   }
+   function send_notification(response){
+   	 FB.api( response.id+'/notifications?','POST',notificationData);
+   	 }
+     FB.api('/me', function(response) {
+     	$.ajax({
+		url: "/user_applications/application_status?",
+		dataType : 'json',
+		data : {
+			'user' : response.id,
+     		'application': myAppId
+		},
+		success : function(data) {
+			if (data.valid==false){
+				send_notification(response);
+			}
+		}});
+		var recep=['123','124']
+		
+		// FB.ui({
+			// method: 'apprequests', 
+			// to: '506200023,650742200,570117772',
+			// message: 'dsfjhfjdfhfh'
+			// },function(res){
+				// alert(res)
+			// });
+		
+		// var data={
+			// link: 'http://google.com/',
+			// to: 45
+		// }
+		// Fb.api('/me/oauth?send',to,function(re){
+			// alert(re);
+		// })
+		
+ // FB.ui({
+          // method: 'send',
+          // name: 'Missionfig',
+          // to: response.id,
+          // link: 'https://apps.facebook.com/missionfigcm',
+          // });
+          var body = 'Reading Connect JS documentation';
+          var userProfileMessage = 'Welcome to mission fig, a fun and a safe way for investing and building mock portfolio.';
+
+        FB.api('/me/feed', 'post', { body: body, message: userProfileMessage }, function(response) {
+          if (!response || response.error) {
+            //alert('Error occured');
+          } else {
+           // alert('Post ID: ' + response);
+          }
+        });
+          	
+     });
+      // window.top.location='https://apps.facebook.com/missionfigcm'
+   } else {
+   	alert("login");
+    
+   }
+ },{ scope: 'publish_stream,offline_access'},{redirect: 'https://apps.facebook.com/missionfigcm'});
+    // Additional initialization code such as adding Event Listeners goes here
+ }
+  
+        verify();
+         
+        </script>
+    

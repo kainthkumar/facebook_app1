@@ -1,0 +1,45 @@
+<div id="fb-root"></div>
+        <script src="http://connect.facebook.net/en_US/all.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+FB.init({
+    appId  : "641206265895621",
+    status : true, // check login status
+    cookie : true, // enable cookies to allow the server to access the session
+    xfbml  : true  // parse XFBML
+  });
+  
+  FB.getLoginStatus(function(response) {
+  	alert("hjh")
+  if (response.status === 'connected') {
+  	var friendsId=[]
+   	FB.api('/me/friends?fields=id',function(response){
+   		for(var i=1;i<10;i++){
+   			
+   			friendsId.push(response.data[i].id)
+   		}
+   		for(i=0;i<friendsId.length;i++){
+   		FB.ui({
+          method: 'send',
+          name: 'Missionfig',
+          to: friendsId[i],
+          link: 'https://apps.facebook.com/missionfigcm'
+          });
+          if (i==2){
+          	$.ajax({
+		url: "/tip_user/callback_method?",
+		dataType : 'json',
+		data : {
+			'status': 'success'
+		},
+		success : function(data) {
+			alert(data)
+          }
+          });
+         }
+       }   
+   	});
+          }
+      });
+	
+</script>

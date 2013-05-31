@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  owner_type: MyString
+  original_mesage: MyString
+  responses: MyString
+
+two:
+  owner_type: MyString
+  original_mesage: MyString
+  responses: MyString

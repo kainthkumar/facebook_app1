@@ -1,0 +1,4 @@
+<cross-domain-policy>
+<allow-access-from domain="*.lognllc.com" />
+<allow-access-from domain="*.akamaihd.net" />
+</cross-domain-policy>

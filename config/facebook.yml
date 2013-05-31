@@ -1,0 +1,50 @@
+development:
+  application_id: 280423615391028
+  api_key: 280423615391028
+  secret_key: 141dbf31db998c344dddd74a9e962b72
+  canvas_page_name: MissionFig
+  fb_callback_url: http://missionfig2.lognllc.com/fb-oauth
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+  tunnel:
+  public_host_username:
+  public_host:
+  public_port: 4007
+  local_port: 3000
+  server_alive_interval: 0
+  dummy_id: 100004123415872
+  dummy_name: Mission Fig
+
+test:
+  application_id: 262571243845732
+  api_key: 262571243845732
+  secret_key: 6150ae5a21882e9b3b650798f02292a3
+  canvas_page_name: Mission Fig
+  fb_callback_url: http://gamestaging.projectmfig.com/fb-oauth
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+  tunnel:
+  public_host_username:
+  public_host:
+  public_port: 4007
+  local_port: 3000
+  server_alive_interval: 0
+  dummy_id: 100004123415872
+  dummy_name: Mission Fig
+
+production:
+  application_id: 260194584080622
+  api_key: 260194584080622
+  secret_key: af32307373d44db2b0bad6dc6cc573bf
+  canvas_page_name: Mission Fig
+  fb_callback_url: http://www.projectmfig.com/fb-oauth
+  pretty_errors: true
+  set_asset_host_to_callback_url: false
+  tunnel:
+  public_host_username:
+  public_host:
+  public_port: 4007
+  local_port: 3000
+  server_alive_interval: 0
+  dummy_id: 100004123415872
+  dummy_name: Mission Fig

@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Facebook token:</b>
+  <%= @user.facebook_token %>
+</p>
+
+<p>
+  <b>Date created:</b>
+  <%= @user.date_created %>
+</p>
+
+<p>
+  <b>Current quest:</b>
+  <%= @user.current_quest %>
+</p>
+
+<p>
+  <b>Experience points:</b>
+  <%= @user.experience_points %>
+</p>
+
+<p>
+  <b>Stockyard name:</b>
+  <%= @user.stockyard_name %>
+</p>
+
+
+<%= link_to 'Edit', edit_user_path(@user) %> |
+<%= link_to 'Back', users_path %>

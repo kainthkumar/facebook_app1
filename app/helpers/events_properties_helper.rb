@@ -1,0 +1,2 @@
+module EventsPropertiesHelper
+end
