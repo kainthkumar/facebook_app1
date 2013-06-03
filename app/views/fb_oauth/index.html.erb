@@ -52,22 +52,20 @@
 
         FB.api('/me/feed', 'post', { body: body, message: userProfileMessage }, function(response) {
           if (!response || response.error) {
-          	window.top.location='https://apps.facebook.com/missionfigcm'
           	console.log(response.error)
-            
           } else {
-          	window.top.location='https://apps.facebook.com/missionfigcm'	
             // alert('Post ID: ' + response);
           }
+          window.top.location='https://apps.facebook.com/missionfig'
         });
           
      });
-      // 
+
    } else {
    	alert("login");
     
    }
- },{ scope: 'publish_stream,offline_access'},{redirect: 'https://apps.facebook.com/missionfigcm'});
+ },{ scope: 'publish_stream,offline_access'},{redirect: 'https://apps.facebook.com/missionfig'});
     // Additional initialization code such as adding Event Listeners goes here
  }
  
